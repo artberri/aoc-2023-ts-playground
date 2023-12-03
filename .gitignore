@@ -1,0 +1,8 @@
+.DS_Store
+
+# Exclude dependencies
+node_modules/
+
+# Exclude solutions
+part1.ts
+part2.ts

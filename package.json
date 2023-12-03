@@ -1,0 +1,41 @@
+{
+	"name": "aoc-2023-ts-playground",
+	"version": "1.0.0",
+	"description": "Advent of Code 2023 TypeScript Playground",
+	"main": "src/index.ts",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/artberri/aoc-2023-ts-playground"
+	},
+	"bugs": "https://github.com/artberri/aoc-2023-ts-playground/issues",
+	"engines": {
+		"node": ">= 20.0.0"
+	},
+	"scripts": {
+		"check-types": "tsc --noEmit",
+		"start": "node -r @swc-node/register src/index.ts",
+		"test": "vitest run",
+		"test:part1": "vitest run --testNamePattern \"Part 1\"",
+		"test:part2": "vitest run --testNamePattern \"Part 2\"",
+		"test:watch": "vitest watch"
+	},
+	"keywords": ["advent", "of", "code", "typescript", "playground"],
+	"author": {
+		"name": "Alberto Varela",
+		"email": "hello@albertovarela.net",
+		"url": "https://www.albertovarela.net"
+	},
+	"private": true,
+	"license": "MIT",
+	"dependencies": {
+		"@inquirer/prompts": "^3.3.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.4.1",
+		"@swc-node/register": "^1.6.8",
+		"@types/node": "^20.0.0",
+		"chalk": "^4.1.2",
+		"typescript": "^5.3.2",
+		"vitest": "^0.34.6"
+	}
+}
