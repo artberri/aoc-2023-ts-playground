@@ -6,7 +6,7 @@ The idea of this repository is to provide an easy to play environment and allow 
 
 - A puzzle runner. Simply run the puzzle with the given input to get the answer.
 - Test cases for the puzzles
-  > I'll add them as I finish them. If you want to start a puzzle before I do, which is quite likely because I'm not a regular player, just create the day structure yourself by copying a previous day and replacing the inputs and expected outputs with those for that day.
+  > I'll add them as I finish them. If you want to start a puzzle before I do read the "What can I do if there is no test for the puzzle I'm trying to solve?" section.
 
 ## Requirements
 
@@ -61,6 +61,17 @@ Run the puzzle using the input provided by the web:
 ```bash
 pnpm start --day 2 --part 2 # You can also just run `pnpm start' and it will prompt for day and part.
 ```
+
+## What can I do if there is no test for the puzzle I'm trying to solve?
+
+If there's no test for the puzzle you're trying to solve, it's because you want to start a puzzle before I do, which is probably because I'm not a regular player.
+
+1. Create the day structure yourself by copying the example provided:
+   ```bash
+   cp -R example src/dayX
+   ```
+2. Rename the test file and replace the placeholders in the file with the inputs and expected outputs of that day's puzzle.
+3. Enjoy the puzzle.
 
 ## Contributing
 

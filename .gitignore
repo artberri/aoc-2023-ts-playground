@@ -6,3 +6,6 @@ node_modules/
 # Exclude solutions
 part1.ts
 part2.ts
+
+# Exclude utils
+src/utils
