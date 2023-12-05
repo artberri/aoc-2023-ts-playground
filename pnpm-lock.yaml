@@ -8,6 +8,9 @@ dependencies:
   '@inquirer/prompts':
     specifier: ^3.3.0
     version: 3.3.0
+  ramda:
+    specifier: ^0.29.1
+    version: 0.29.1
 
 devDependencies:
   '@biomejs/biome':
@@ -19,6 +22,9 @@ devDependencies:
   '@types/node':
     specifier: ^20.0.0
     version: 20.10.2
+  '@types/ramda':
+    specifier: ^0.29.9
+    version: 0.29.9
   chalk:
     specifier: ^4.1.2
     version: 4.1.2
@@ -695,6 +701,12 @@ packages:
     dependencies:
       undici-types: 5.26.5
 
+  /@types/ramda@0.29.9:
+    resolution: {integrity: sha512-X3yEG6tQCWBcUAql+RPC/O1Hm9BSU+MXu2wJnCETuAgUlrEDwTA1kIOdEEE4YXDtf0zfQLHa9CCE7WYp9kqPIQ==}
+    dependencies:
+      types-ramda: 0.29.6
+    dev: true
+
   /@types/wrap-ansi@3.0.0:
     resolution: {integrity: sha512-ltIpx+kM7g/MLRZfkbL7EsCEjfzCcScLpkg37eXEtx5kmrAKBkTJwd1GIAjDSL8wTpM6Hzn5YO4pSb91BEwu1g==}
     dev: false
@@ -1045,6 +1057,10 @@ packages:
       react-is: 18.2.0
     dev: true
 
+  /ramda@0.29.1:
+    resolution: {integrity: sha512-OfxIeWzd4xdUNxlWhgFazxsA/nl3mS4/jGZI5n00uWOoSSFRhC1b6gl6xvmzUamgmqELraWp0J/qqVlXYPDPyA==}
+    dev: false
+
   /react-is@18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
     dev: true
@@ -1161,6 +1177,10 @@ packages:
       os-tmpdir: 1.0.2
     dev: false
 
+  /ts-toolbelt@9.6.0:
+    resolution: {integrity: sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==}
+    dev: true
+
   /tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
     dev: true
@@ -1174,6 +1194,12 @@ packages:
     resolution: {integrity: sha512-t0rzBq87m3fVcduHDUFhKmyyX+9eo6WQjZvf51Ea/M0Q7+T374Jp1aUiyUl0GKxp8M/OETVHSDvmkyPgvX+X2w==}
     engines: {node: '>=10'}
     dev: false
+
+  /types-ramda@0.29.6:
+    resolution: {integrity: sha512-VJoOk1uYNh9ZguGd3eZvqkdhD4hTGtnjRBUx5Zc0U9ftmnCgiWcSj/lsahzKunbiwRje1MxxNkEy1UdcXRCpYw==}
+    dependencies:
+      ts-toolbelt: 9.6.0
+    dev: true
 
   /typescript@5.3.2:
     resolution: {integrity: sha512-6l+RyNy7oAHDfxC4FzSJcz9vnjTKxrLpDG5M2Vu4SHRVNg6xzqZp6LYSR9zjqQTu8DU/f5xwxUdADOkbrIX2gQ==}
