@@ -8,6 +8,8 @@ The idea of this repository is to provide an easy to play environment and allow 
 - Test cases for the puzzles
   > I'll add them as I finish them. If you want to start a puzzle before I do read the "What can I do if there is no test for the puzzle I'm trying to solve?" section.
 
+My solutions live in the branch `solutions` of this repository.
+
 ## Requirements
 
 Node.js v20 and PNPM v8.
@@ -21,7 +23,7 @@ Node.js v20 and PNPM v8.
 
 Each Advent of Code 2023 puzzle has two parts. For example, imagine that you want to solve the puzzle of the day2.
 
-Create the file `src/day2/part1.ts` with the following code:
+There is a file `src/day2/part1.ts` with the following code:
 
 ```ts
 // src/day2/part1.ts
@@ -46,7 +48,7 @@ pnpm start --day 2 --part 1 # You can also just run `pnpm start' and it will pro
 
 Once you solve the first part you can start with the second one. It is mostly the same.
 
-Create the file `src/day2/part2.ts`, it is probably worth starting by copying the code from the part 1:
+Edit the file `src/day2/part2.ts`, it is probably worth starting by copying the code from the part 1:
 
 Run the tests and see it fail for the part 2:
 

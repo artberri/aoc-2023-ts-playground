@@ -1,10 +1,9 @@
-import { describe, expect, test, vi } from "vitest";
+import { describe, expect, test } from "vitest";
+import part1 from "./part1";
+import part2 from "./part2";
 
 describe("Day 8: Haunted Wasteland", () => {
 	test("Part 1", async () => {
-		loadPart1();
-		await vi.dynamicImportSettled();
-
 		const input = `RL
 
 AAA = (BBB, CCC)
@@ -15,7 +14,7 @@ EEE = (EEE, EEE)
 GGG = (GGG, GGG)
 ZZZ = (ZZZ, ZZZ)`;
 
-		const answer = sut(input);
+		const answer = part1(input);
 		expect(answer).toBe("2");
 
 		const input2 = `LLR
@@ -24,14 +23,11 @@ AAA = (BBB, BBB)
 BBB = (AAA, ZZZ)
 ZZZ = (ZZZ, ZZZ)`;
 
-		const answer2 = sut(input2);
+		const answer2 = part1(input2);
 		expect(answer2).toBe("6");
 	});
 
 	test("Part 2", async () => {
-		loadPart2();
-		await vi.dynamicImportSettled();
-
 		const input = `LR
 
 11A = (11B, XXX)
@@ -43,25 +39,7 @@ ZZZ = (ZZZ, ZZZ)`;
 22Z = (22B, 22B)
 XXX = (XXX, XXX)`;
 
-		const answer = sut(input);
+		const answer = part2(input);
 		expect(answer).toBe("6");
 	});
 });
-
-let sut: (input: string) => string;
-
-function loadPart1() {
-	import("./part1").then(
-		(solution: { default: (input: string) => string }) => {
-			sut = solution.default;
-		},
-	);
-}
-
-function loadPart2() {
-	import("./part2").then(
-		(solution: { default: (input: string) => string }) => {
-			sut = solution.default;
-		},
-	);
-}

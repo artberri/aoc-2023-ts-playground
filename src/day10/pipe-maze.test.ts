@@ -1,17 +1,16 @@
-import { describe, expect, test, vi } from "vitest";
+import { describe, expect, test } from "vitest";
+import part1 from "./part1";
+import part2 from "./part2";
 
 describe("Day 10: Pipe Maze", () => {
 	test("Part 1", async () => {
-		loadPart1();
-		await vi.dynamicImportSettled();
-
 		const input1 = `.....
 .S-7.
 .|.|.
 .L-J.
 .....`;
 
-		const answer1 = sut(input1);
+		const answer1 = part1(input1);
 		expect(answer1).toBe("4");
 
 		const input2 = `-L|F7
@@ -20,7 +19,7 @@ L|7||
 -L-J|
 L|-JF`;
 
-		const answer2 = sut(input2);
+		const answer2 = part1(input2);
 		expect(answer2).toBe("4");
 
 		const input3 = `..F7.
@@ -29,7 +28,7 @@ SJ.L7
 |F--J
 LJ...`;
 
-		const answer3 = sut(input3);
+		const answer3 = part1(input3);
 		expect(answer3).toBe("8");
 
 		const input4 = `7-F7-
@@ -38,14 +37,11 @@ SJLL7
 |F--J
 LJ.LJ`;
 
-		const answer4 = sut(input4);
+		const answer4 = part1(input4);
 		expect(answer4).toBe("8");
 	});
 
 	test("Part 2", async () => {
-		loadPart2();
-		await vi.dynamicImportSettled();
-
 		const input1 = `...........
 .S-------7.
 .|F-----7|.
@@ -56,7 +52,7 @@ LJ.LJ`;
 .L--J.L--J.
 ...........`;
 
-		const answer1 = sut(input1);
+		const answer1 = part2(input1);
 		expect(answer1).toBe("4");
 
 		const input2 = `..........
@@ -69,7 +65,7 @@ LJ.LJ`;
 .L--JL--J.
 ..........`;
 
-		const answer2 = sut(input2);
+		const answer2 = part2(input2);
 		expect(answer2).toBe("4");
 
 		const input3 = `.F----7F7F7F7F-7....
@@ -83,7 +79,7 @@ L--J.L7...LJS7F-7L7.
 ....FJL-7.||.||||...
 ....L---J.LJ.LJLJ...`;
 
-		const answer3 = sut(input3);
+		const answer3 = part2(input3);
 		expect(answer3).toBe("8");
 
 		const input4 = `FF7FSF7F7F7F7F7F---7
@@ -97,25 +93,7 @@ L---JF-JLJ.||-FJLJJ7
 L.L7LFJ|||||FJL7||LJ
 L7JLJL-JLJLJL--JLJ.L`;
 
-		const answer4 = sut(input4);
+		const answer4 = part2(input4);
 		expect(answer4).toBe("10");
 	});
 });
-
-let sut: (input: string) => string;
-
-function loadPart1() {
-	import("./part1").then(
-		(solution: { default: (input: string) => string }) => {
-			sut = solution.default;
-		},
-	);
-}
-
-function loadPart2() {
-	import("./part2").then(
-		(solution: { default: (input: string) => string }) => {
-			sut = solution.default;
-		},
-	);
-}

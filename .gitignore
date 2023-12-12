@@ -2,10 +2,3 @@
 
 # Exclude dependencies
 node_modules/
-
-# Exclude solutions
-src/**/part1.ts
-src/**/part2.ts
-
-# Exclude utils
-src/utils
