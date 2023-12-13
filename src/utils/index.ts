@@ -1,4 +1,4 @@
-import { map, pipe, reverse, split, trim } from "ramda";
+import { join, map, pipe, reverse, split, trim } from "ramda";
 
 export { clone, filter, map, min, pipe, reverse, sum, without } from "ramda";
 
@@ -29,6 +29,11 @@ const toParagraphs = (lines: string[]): string[][] => {
 	return paragraphs;
 };
 export const paragraphs = pipe(lines, toParagraphs);
+
+export const matrixToLines = (matrix: Matrix): string[] => matrix.map(join(""));
+
+export const toMatrixes = (s: string): Matrix[] =>
+	paragraphs(s).map((p) => p.map((l) => l.split("")));
 
 export const reverseString = (s: string) => reverse(s);
 

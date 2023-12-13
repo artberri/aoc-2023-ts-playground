@@ -2,15 +2,3 @@
 
 # Exclude dependencies
 node_modules/
-<<<<<<< HEAD
-||||||| parent of e34d987 (add solutions)
-
-# Exclude solutions
-src/**/part1.ts
-src/**/part2.ts
-
-# Exclude utils
-src/utils
-=======
-
->>>>>>> e34d987 (add solutions)
