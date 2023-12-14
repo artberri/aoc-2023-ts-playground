@@ -1,3 +1,4 @@
+import crypto from "crypto";
 import { join, map, pipe, reverse, split, trim } from "ramda";
 
 export { clone, filter, map, min, pipe, reverse, sum, without } from "ramda";
@@ -69,6 +70,31 @@ export const transpose = <T>(a: Matrix<T>): Matrix<T> => {
 	);
 };
 
+export const rotate = <T>(matrix: Matrix<T>): Matrix<T> => {
+	const M = matrix.length;
+	const N = matrix[0]?.length ?? 0;
+
+	const destination = new Array<T[]>(N);
+	for (let i = 0; i < N; i++) {
+		destination[i] = new Array<T>(M);
+	}
+
+	for (let i = 0; i < N; i++) {
+		for (let j = 0; j < M; j++) {
+			const value = matrix[M - j - 1]?.[i];
+			if (!value) {
+				throw new Error(
+					`Could not find value for ${i}, ${j} in ${JSON.stringify(matrix)}`,
+				);
+			}
+			// biome-ignore lint/style/noNonNullAssertion: will exist
+			destination[i]![j] = value;
+		}
+	}
+
+	return destination;
+};
+
 export const eachMatrix = <T>(
 	matrix: Matrix<T>,
 	eachFn: (item: T, pos: [number, number], matrix: Matrix<T>) => void,
@@ -83,3 +109,6 @@ export const eachMatrix = <T>(
 		}
 	}
 };
+
+export const hash = (str: string) =>
+	crypto.createHash("md5").update(str).digest("hex");
