@@ -130,3 +130,50 @@ export const eachMatrix = <T>(
 
 export const hash = (str: string) =>
 	crypto.createHash("md5").update(str).digest("hex");
+
+export type Direction = "up" | "down" | "right" | "left";
+
+export type Navigation = {
+	point: Coordinate;
+	direction: Direction;
+};
+
+export function readCell(
+	matrix: Matrix,
+	[x, y]: Coordinate,
+): string | undefined {
+	return matrix[y]?.[x];
+}
+
+export function navigate(point: Coordinate, direction: Direction): Coordinate {
+	const [x, y] = point;
+
+	const next = {
+		up: [x, y - 1],
+		down: [x, y + 1],
+		left: [x - 1, y],
+		right: [x + 1, y],
+	} as const;
+
+	return next[direction];
+}
+
+export const mapMatrix = <T, K>(
+	matrix: Matrix<T>,
+	eachFn: (item: T, pos?: [number, number], matrix?: Matrix<T>) => K,
+): Matrix<K> => {
+	const mapped: K[][] = [];
+	for (let y = 0; y < matrix.length; y++) {
+		const length = matrix[y]?.length ?? 0;
+		for (let x = 0; x < length; x++) {
+			const value = matrix[y]?.[x];
+			if (value !== undefined) {
+				mapped[y] ??= [];
+				// biome-ignore lint/style/noNonNullAssertion: see line above
+				mapped[y]![x] = eachFn(value, [x, y], matrix);
+			}
+		}
+	}
+
+	return mapped;
+};
