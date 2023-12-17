@@ -1,58 +1,86 @@
-import { FixedArray, Range, sum } from "../utils";
-
-type Box = { label: string; length: number }[];
+import { Matrix, isNotNil, mapMatrix, toMatrix } from "../utils";
 
 export default (input: string): string => {
-	const boxes = Array.from({ length: 256 }, (_) => [] as Box) as FixedArray<
-		Box,
-		256
-	>;
-	const steps = input.replaceAll("\n", "").split(",");
-	for (const step of steps) {
-		if (step.includes("=")) {
-			const [label, lengthS] = step.split("=");
-			const length = parseInt(lengthS ?? "", 10);
-			const box = hash(label ?? "");
-			const index = boxes[box].findIndex((b) => b.label === label);
-			if (index !== -1) {
-				// biome-ignore lint/style/noNonNullAssertion: index will exist
-				boxes[box][index]!.length = length;
-				continue;
-			}
-
-			boxes[box].push({ label: label ?? "", length });
-			continue;
-		}
-
-		const label = step.slice(0, step.indexOf("-"));
-		const box = hash(label);
-		const index = boxes[box].findIndex((b) => b.label === label);
-		if (index >= 0) {
-			boxes[box] = boxes[box].filter((_, i) => i !== index);
-		}
-	}
-
-	return sum(boxes.map((box, index) => power(box, index + 1))).toString();
+	const matrix = toMatrix(input.trim());
+	const grid = mapMatrix(matrix, (item) => Number.parseInt(item, 10));
+	const minimalHeatLoss = getMinimalHeatLoss(grid);
+	return minimalHeatLoss.toString();
 };
 
-function power(box: Box, boxNumber: number): number {
-	if (box.length === 0) {
-		return 0;
+type Queued = [
+	heatLoss: number,
+	row: number,
+	column: number,
+	deltaRow: number,
+	deltaColumn: number,
+	steps: number,
+];
+
+function getMinimalHeatLoss(grid: Matrix<number>) {
+	const queue: Queued[] = [[0, 0, 0, 0, 0, 0]];
+
+	const seen = new Set<string>();
+
+	while (queue.length) {
+		const [hl, r, c, dr, dc, n] = queue
+			.sort(([prevCost], [nextCost]) => nextCost - prevCost)
+			.pop() ?? [0, 0, 0, 0, 0, 0];
+
+		if (
+			r === grid.length - 1 &&
+			isNotNil(grid[0]?.length) &&
+			c === grid[0].length - 1 &&
+			n >= 4
+		) {
+			return hl;
+		}
+
+		const key = JSON.stringify([r, c, dr, dc, n]);
+
+		if (seen.has(key)) continue;
+
+		seen.add(key);
+
+		if (n < 10 && ![dr, dc].every((coord) => coord === 0)) {
+			const nr = r + dr;
+			const nc = c + dc;
+
+			if (
+				0 <= nr &&
+				nr < grid.length &&
+				0 <= nc &&
+				nc < (grid[0]?.length ?? 0)
+			) {
+				queue.push([hl + (grid[nr]?.[nc] ?? 0), nr, nc, dr, dc, n + 1]);
+			}
+		}
+
+		if (n >= 4 || [dr, dc].every((coord) => coord === 0)) {
+			for (const [ndr, ndc] of [
+				[0, 1],
+				[1, 0],
+				[0, -1],
+				[-1, 0],
+			] as const) {
+				if (
+					JSON.stringify([ndr, ndc]) !== JSON.stringify([dr, dc]) &&
+					JSON.stringify([ndr, ndc]) !== JSON.stringify([-dr, -dc])
+				) {
+					const nr = r + ndr;
+					const nc = c + ndc;
+
+					if (
+						0 <= nr &&
+						nr < grid.length &&
+						0 <= nc &&
+						nc < (grid[0]?.length ?? 0)
+					) {
+						queue.push([hl + (grid[nr]?.[nc] ?? 0), nr, nc, ndr, ndc, 1]);
+					}
+				}
+			}
+		}
 	}
 
-	return sum(box.map((lens, index) => lens.length * (index + 1) * boxNumber));
-}
-
-function hash(input: string): Range<0, 255> {
-	return input
-		.split("")
-		.map(getAscii)
-		.reduce((acc, value) => {
-			const result = ((acc + value) * 17) % 256;
-			return result;
-		}, 0) as Range<0, 255>;
-}
-
-function getAscii(input: string): number {
-	return input.charCodeAt(0);
+	return 0;
 }
