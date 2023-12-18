@@ -145,14 +145,18 @@ export function readCell(
 	return matrix[y]?.[x];
 }
 
-export function navigate(point: Coordinate, direction: Direction): Coordinate {
+export function navigate(
+	point: Coordinate,
+	direction: Direction,
+	distance = 1,
+): Coordinate {
 	const [x, y] = point;
 
 	const next = {
-		up: [x, y - 1],
-		down: [x, y + 1],
-		left: [x - 1, y],
-		right: [x + 1, y],
+		up: [x, y - distance],
+		down: [x, y + distance],
+		left: [x - distance, y],
+		right: [x + distance, y],
 	} as const;
 
 	return next[direction];
